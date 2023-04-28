@@ -12,7 +12,7 @@ dependency "vnet" {
     test_vnet_id = "mock_vnet_id"
   }
 
-  mock_outputs_allowed_terraform_commands = ["apply", "plan", "destroy", "output"]
+  mock_outputs_allowed_terraform_commands = ["init","apply", "plan", "destroy", "output"]
 }
 
 locals {
