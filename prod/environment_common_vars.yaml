@@ -1,0 +1,15 @@
+common:
+  backend:
+    resource_group_name: az220
+    storage_account_name: tgdemo20202
+    container_name: terraform
+  providers:
+    azurerm:
+      version: 3.27.0
+modules:
+  common:
+    location: eastus
+  aks:
+    skip: true
+  vnet:
+    skip: false  
