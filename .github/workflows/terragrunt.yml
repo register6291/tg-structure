@@ -57,14 +57,14 @@ jobs:
  
     - name: Terragrunt Init
       run: |
-        terragrunt run-all init --terragrunt-working-dir ${{ github.event.inputs.environment }}"
+        terragrunt run-all init --terragrunt-working-dir ${{ github.event.inputs.environment }}
         
     - name: Terragrunt Plan
       run: |
-        terragrunt run-all plan --terragrunt-working-dir ${{ github.event.inputs.environment }}" 
+        terragrunt run-all plan --terragrunt-working-dir ${{ github.event.inputs.environment }} 
     
     # - name: Terragrunt Apply
     #   run: |
-    #     terragrunt run-all apply --terragrunt-working-dir ${{ github.event.inputs.environment }}"     
+    #     terragrunt run-all apply --terragrunt-working-dir ${{ github.event.inputs.environment }}    
       
      
