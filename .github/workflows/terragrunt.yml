@@ -16,11 +16,12 @@ on:
 permissions:
   contents: read
 
+env:
+  TERRAGRUNT_DIRECTORY:  ${{github.workspace}}/../terragrunt_directory
 jobs:
-  terraform:
+  terragrunt:
     name: 'Terragrunt'
     runs-on: ubuntu-latest
-    environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -51,10 +52,18 @@ jobs:
     
     - name: Set arguments
       run: |
-        export TERRAGRUNT_DOWNLOAD=.
+        export TERRAGRUNT_DOWNLOAD="$TERRAGRUNT_DIRECTORY"
         export TERRAGRUNT_LOG_LEVEL=debug
         echo ${{ github.event.inputs.environment }}"
+        export ARM_CLIENT_ID=${{secrets.ARM_CLIENT_ID}}
+        export ARM_CLIENT_SECRET=${{secrets.ARM_CLIENT_SECRET}}
+        export ARM_TENANT_ID=${{secrets.ARM_TENANT_ID}}
+        export ARM_SUBSCRIPTION_ID=${{secrets.ARM_SUBSCRIPTION_ID}}
 
+    
+    - name: Terragrunt Init
+      run: |
+        terragrunt init --terragrunt-working-dir ${{ github.event.inputs.environment }}"
         
       
      
