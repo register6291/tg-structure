@@ -50,14 +50,14 @@ jobs:
       run: |
         export TERRAGRUNT_LOG_LEVEL=debug
         echo ${{ github.event.inputs.environment }}
-        export ARM_CLIENT_ID=${{secrets.ARM_CLIENT_ID}}
-        export ARM_CLIENT_SECRET=${{secrets.ARM_CLIENT_SECRET}}
-        export ARM_TENANT_ID=${{secrets.ARM_TENANT_ID}}
-        export ARM_SUBSCRIPTION_ID=${{secrets.ARM_SUBSCRIPTION_ID}}
- 
+       
     - name: Terragrunt Init
       run: |
-        terragrunt run-all init --terragrunt-working-dir ${{ github.event.inputs.environment }}
+         export ARM_CLIENT_ID=${{secrets.ARM_CLIENT_ID}}
+         export ARM_CLIENT_SECRET=${{secrets.ARM_CLIENT_SECRET}}
+         export ARM_TENANT_ID=${{secrets.ARM_TENANT_ID}}
+         export ARM_SUBSCRIPTION_ID=${{secrets.ARM_SUBSCRIPTION_ID}}
+         terragrunt run-all init --terragrunt-working-dir ${{ github.event.inputs.environment }}
         
     - name: Terragrunt Plan
       run: |
