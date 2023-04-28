@@ -44,9 +44,10 @@ jobs:
     
     - name: Check Versions
       run: |
-        terrarunt --version
+        terragrunt --version
         terraform --version
         pwd
+        ls -lrta
     
     - name: Set arguments
       run: |
