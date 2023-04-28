@@ -1,0 +1,3 @@
+values:
+  vnet_location: westus
+  virtual_network_name: final_vnet
