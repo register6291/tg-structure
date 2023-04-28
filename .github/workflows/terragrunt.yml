@@ -3,10 +3,16 @@
 name: 'Terragrunt Deploy'
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Select an environment to continue
+        options: 
+        - dev
+        - int
+        - staging
+        - prod
 permissions:
   contents: read
 
@@ -26,7 +32,28 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
+
+    # Install the latest version of Terragrunt CLI and configure the Terragrunt CLI configuration 
+    - name: Setup Terragrunt
+      uses: autero1/action-terragrunt@v1.1.0
+      with:
+        terragrunt_version: 0.45.5
+    
+    - name: Check Versions
+      run: |
+        terrarunt --version
+        terraform --version
+        pwd
+    
+    - name: Set arguments
+      run: |
+        export TERRAGRUNT_DOWNLOAD=.
+        export TERRAGRUNT_LOG_LEVEL=debug
+        echo ${{ github.event.inputs.environment }}"
+
+        
+      
      
